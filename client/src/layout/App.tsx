@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Product } from "./product";
+import { Product } from "../models/product";
+import Catalog from "../features/catalog/Catalog";
+import { Typography } from "@mui/material";
 
 const App = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,20 +19,15 @@ const App = () => {
         id: prev.length + 101,
         name: "product" + (prev.length + 1),
         price: prev.length * 100 + 100,
+        pictureUrl: "http://picsum.photos/200",
       },
     ]);
   }
   return (
-    <div>
-      <h1>ReStore</h1>
-      <ul>
-        {products.map((product, i) => (
-          <li key={product.id}>
-            {product.name} - {product.price}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Typography variant="h1">ReStore</Typography>
+      <Catalog products={products} addProduct={addProduct} />
+    </>
   );
 };
 
